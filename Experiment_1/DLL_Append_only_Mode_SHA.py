@@ -41,12 +41,20 @@ class AppendOnlyList:
             print(f"data: {cur.data}\n  prevHash: {cur.prev_hash}\n  hash:     {cur.hash}")
             cur = cur.next
 
+    def deleteNode(self, node: Node):
+        # In an append-only list, we do not allow deletion of nodes.
+        print("Deletion is not allowed in AppendOnlyList.")
+
+    def modifyNode(self, node: Node, val: str):
+        # In an append-only list, we do not allow modification of nodes.
+        print("Modification is not allowed in AppendOnlyList.")
+
 
 # --- demo ---
 lst = AppendOnlyList()
-lst.append("first entry")
-second = lst.append("second entry")
-lst.append("third entry")
+lst.append("1")
+second = lst.append("2")
+lst.append("3")
 
 print("=== Full chain ===")
 lst.print_all()
@@ -56,3 +64,6 @@ found = lst.find_by_hash(second.hash)
 if found:
     print("prev:", found.prev.data if found.prev else None)
     print("next:", found.next.data if found.next else None)
+
+lst.deleteNode(second)  # This will raise NotImplementedError
+lst.modifyNode(second, "1")  # This will raise NotImplementedError
